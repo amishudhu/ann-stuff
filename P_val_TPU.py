@@ -19,10 +19,7 @@ pd.options.display.float_format = '{:40,.8f}'.format
 np.seterr(divide='ignore')
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
-#cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
-#tf.config.experimental_connect_to_cluster(cluster_resolver)
-#tf.tpu.experimental.initialize_tpu_system(cluster_resolver)
-#strategy = tf.distribute.TPUStrategy(cluster_resolver)
+
 def Data_process(Picklefile):
     
     Datagroup=pd.read_pickle(Picklefile)
@@ -91,7 +88,10 @@ def p_val_est():
         Gradient_sq_sum.loc[z]=[np.mean(np.square(Gradient_list[:,0])),np.mean(np.square(Gradient_list[:,1])),np.mean(np.square(Gradient_list[:,2])),np.mean(np.square(Gradient_list[:,3])),np.mean(np.square(Gradient_list[:,4]))]
     for m in range(len(Gradient_sq_sum.columns)):
         print(f'The 90th, 95th and 99th percentiles for {list(Traintest[0].columns.values)[m]} are: ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 90)) + ',' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 95)) + ', and ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 99))+ '.')
-
+cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
+tf.config.experimental_connect_to_cluster(cluster_resolver)
+tf.tpu.experimental.initialize_tpu_system(cluster_resolver)
+strategy = tf.distribute.TPUStrategy(cluster_resolver)
 full=strategy.run(p_val_est())
        
     
