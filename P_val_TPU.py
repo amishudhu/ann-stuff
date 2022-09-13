@@ -20,8 +20,10 @@ np.seterr(divide='ignore')
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
 
-tf_export('distribute.cluster_resolver.TPUClusterResolver')(TPUClusterResolver)
-cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
+tf.distribute.experimental.TPUStrategy(
+    tpu_cluster_resolver=None, device_assignment=None
+)
+cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='tpu-name')
 tf.config.experimental_connect_to_cluster(cluster_resolver)
 tf.tpu.experimental.initialize_tpu_system(cluster_resolver)
 strategy = tf.distribute.TPUStrategy(cluster_resolver)
