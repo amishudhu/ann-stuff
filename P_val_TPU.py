@@ -64,9 +64,9 @@ def model_arch():
 def p_val_est():
     Gradient_sq_sum=pd.DataFrame(columns=["S_gradient","K_gradient","T_gradient","r_gradient","G-vol_gradient"])
     conv_x=np.array_split(Traintest[0],31770)
-    for z in range(10000):
+    for z in range(5):
         Stack_of_models=[]
-        for k in range(100):
+        for k in range(5):
             TModel=model_arch()
             Stack_of_models.append(TModel)
         Model_outputs=pd.DataFrame()
