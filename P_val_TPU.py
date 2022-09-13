@@ -19,10 +19,6 @@ pd.options.display.float_format = '{:40,.8f}'.format
 np.seterr(divide='ignore')
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
-
-tf.distribute.experimental.TPUStrategy(
-    tpu_cluster_resolver=None, device_assignment=None
-)
 cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='t1v-n-36174ace-w-0')
 tf.config.experimental_connect_to_cluster(cluster_resolver)
 tf.tpu.experimental.initialize_tpu_system(cluster_resolver)
