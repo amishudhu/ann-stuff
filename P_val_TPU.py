@@ -62,6 +62,7 @@ def model_arch():
     model.fit(Traintest[0], Traintest[2], epochs=100, validation_split=0.20, verbose=1,
                 batch_size=1000,validation_data=(Traintest[1],Traintest[3]),callbacks=[es])
     return model
+@tf.function
 def p_val_est():
     Gradient_sq_sum=pd.DataFrame(columns=["S_gradient","K_gradient","T_gradient","r_gradient","G-vol_gradient"])
     conv_x=np.array_split(Traintest[0],31770)
