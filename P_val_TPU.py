@@ -1,7 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jul 16 10:08:23 2022
-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import is_running_in_gce  # pylint: disable=unused-import
+from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import TPUClusterResolver
+from tensorflow.python.util.tf_export import tf_export
 import numpy as np
 import tensorflow as tf 
 sess = tf.compat.v1.Session()
@@ -17,11 +19,6 @@ pd.options.display.float_format = '{:40,.8f}'.format
 np.seterr(divide='ignore')
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
-
-
-from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import is_running_in_gce  # pylint: disable=unused-import
-from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import TPUClusterResolver
-from tensorflow.python.util.tf_export import tf_export
 
 def Data_process(Picklefile):
     
@@ -93,7 +90,7 @@ def p_val_est():
         print(f'The 90th, 95th and 99th percentiles for {list(Traintest[0].columns.values)[m]} are: ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 90)) + ',' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 95)) + ', and ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 99))+ '.')
 import tensorflow as tf
 
-resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
+resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='power-machine')
 tf.config.experimental_connect_to_cluster(resolver)
 tf.tpu.experimental.initialize_tpu_system(resolver)
 strategy = tf.distribute.experimental.TPUStrategy(resolver)
