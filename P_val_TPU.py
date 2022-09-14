@@ -40,7 +40,7 @@ def Data_process(Picklefile):
     X_train, X_test, Y_train, Y_test = train_test_split(Datagroup_Data_X, Datagroup_Data_Y, test_size=0.2)
     return  X_train, X_test, Y_train, Y_test
 
-Traintest=Data_process("ITM_call_data.pkl")
+Traintest=Data_process("ann-stuff/ITM_call_data.pkl")
 def model_arch():
     #strategy = tf.distribute.MirroredStrategy()
     #with tf.device('/gpu:0'):
