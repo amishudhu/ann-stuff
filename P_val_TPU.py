@@ -2,8 +2,6 @@
 """
 Created on Sat Jul 16 10:08:23 2022
 
-@author: all
-"""
 import numpy as np
 import tensorflow as tf 
 sess = tf.compat.v1.Session()
