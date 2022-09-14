@@ -19,9 +19,7 @@ pd.options.display.float_format = '{:40,.8f}'.format
 np.seterr(divide='ignore')
 from sklearn.model_selection import train_test_split
 from keras.callbacks import EarlyStopping
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 
 from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import is_running_in_gce  # pylint: disable=unused-import
 from tensorflow.python.distribute.cluster_resolver.tpu.tpu_cluster_resolver import TPUClusterResolver
