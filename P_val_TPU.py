@@ -22,7 +22,7 @@ from keras.callbacks import EarlyStopping
 
 def Data_process(Picklefile):
     
-    Datagroup=pd.read_pickle(Picklefile)
+    Datagroup=pickle.load(open(Picklefile,rb))
     Datagroup_X=[Datagroup['S'],Datagroup['K'],Datagroup['T'],Datagroup['r'],Datagroup['G-vol']]
 
     Datagroup_X=pd.concat(Datagroup_X,axis=1)
