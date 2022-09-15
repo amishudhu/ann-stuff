@@ -90,7 +90,7 @@ def p_val_est():
         print(f'The 90th, 95th and 99th percentiles for {list(Traintest[0].columns.values)[m]} are: ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 90)) + ',' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 95)) + ', and ' + repr(np.percentile(Gradient_sq_sum[Gradient_sq_sum.columns[m]], 99))+ '.')
 import tensorflow as tf
 
-resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='power-machine')
+resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
 tf.config.experimental_connect_to_cluster(resolver)
 tf.tpu.experimental.initialize_tpu_system(resolver)
 strategy = tf.distribute.experimental.TPUStrategy(resolver)
